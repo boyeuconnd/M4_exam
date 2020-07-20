@@ -2,9 +2,40 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Danh sách thành phố</title>
 </head>
 <body>
-xin chao
+<a href="/create"><button>Thêm Thành Phố</button></a>
+<table style="border: 1px solid black">
+    <tr>
+        <th>#</th>
+        <th>Thành Phố</th>
+        <th>Quốc Gia</th>
+        <th></th>
+    </tr>
+    <tr th:each="city:${cities}">
+        <td th:field="${city.id}"></td>
+        <td th:field="${city.name}"><a th:href="@{/detail/__${city.id}__}" th:text="${city.name}"></a></td>
+        <td th:field="${city.country.name}" th:text="${city.country.name}"></td>
+        <td>
+            <a th:href="@{/edit/__${city.id}__}">Chỉnh Sửa</a>
+
+                <form th:action="@{/delete/__${city.id}__}" method="post">
+                    <button onclick="myconfirm()">
+                        Xóa
+                    </button>
+                </form>
+
+        </td>
+    </tr>
+</table>
+
+<script>
+    function myconfirm() {
+        confirm("Bạn muốn xóa thành phố?")
+    }
+</script>
+
+
 </body>
 </html>

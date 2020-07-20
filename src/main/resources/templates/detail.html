@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail</title>
+</head>
+<body>
+
+<h1>City Detail</h1>
+
+    <table th:object="${detailCity}">
+        <tr>
+            <td>
+                Tên
+            </td>
+            <td>
+                <input disabled type="text" th:field="*{name}" th:value="*{name}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Quốc Gia
+            </td>
+            <td>
+                <input disabled th:field="*{country}"  th:value="*{country.getName()}" />
+
+
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Diện Tích
+            </td>
+            <td>
+                <input disabled type="number" th:field="*{square}" th:value="*{square}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Dân số
+            </td>
+            <td>
+                <input disabled type="number" th:field="*{population}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                GPD
+            </td>
+            <td>
+                <input disabled type="number" th:field="*{gdp}" th:value="*{gdp}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Mô tả
+            </td>
+            <td>
+                <textarea  disabled th:field="*{description}" th:text="*{description}"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a th:href="@{/edit/__${detailCity.id}__}">
+                    <button type="submit">Sửa thông tin</button>
+                </a>
+            </td>
+            <td>
+                <a href="/">
+                    <button type="button">Thoát</button>
+                </a>
+            </td>
+        </tr>
+
+    </table>
+<!--    <div>-->
+<!--        <th:block th:if="${mess}">-->
+<!--            <div class="fs-25 t-center" style="color: green" th:text="${mess}"></div>-->
+<!--        </th:block>-->
+<!--    </div>-->
+
+</body>
+</html>

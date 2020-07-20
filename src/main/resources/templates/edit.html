@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+</head>
+<body>
+<h1>Edit City</h1>
+
+<form th:action="@{/edit/__${editCity.id}__}" method="post" th:object="${editCity}">
+    <table>
+        <tr>
+            <td>
+                Tên
+            </td>
+            <td>
+                <input type="text" th:field="*{name}" th:value="*{name}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Quốc Gia
+            </td>
+            <td>
+                <select th:field="*{country}"  >
+                    <option th:each="ctry:${allCountry}"  th:value="${ctry.getId()}" th:text="${ctry.getName()}"></option>
+
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Diện Tích
+            </td>
+            <td>
+                <input type="number" th:field="*{square}" th:value="*{square}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Dân số
+            </td>
+            <td>
+                <input type="number" th:field="*{population}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                GPD
+            </td>
+            <td>
+                <input type="number" th:field="*{gdp}" th:value="*{gdp}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Mô tả
+            </td>
+            <td>
+                <textarea  th:field="*{description}" th:text="*{description}"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td><button type="submit">Sửa thông tin</button></td>
+            <td>
+                <a href="/">
+                    <button type="button">Thoát</button>
+                </a>
+            </td>
+        </tr>
+
+    </table>
+    <div>
+        <th:block th:if="${mess}">
+            <div class="fs-25 t-center" style="color: green" th:text="${mess}"></div>
+        </th:block>
+    </div>
+</form>
+
+</body>
+</html>
