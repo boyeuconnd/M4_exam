@@ -7,7 +7,7 @@
 <body>
 <h1>Edit City</h1>
 
-<form th:action="@{/edit/__${editCity.id}__}" method="post" th:object="${editCity}">
+<form th:action="@{/edit/__${editCity.getId()}__}" method="post" th:object="${editCity}">
     <table>
         <tr>
             <td>
@@ -75,6 +75,10 @@
             <div class="fs-25 t-center" style="color: green" th:text="${mess}"></div>
         </th:block>
     </div>
+    <div  th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+    <div  th:if="${#fields.hasErrors('square')}" th:errors="*{square}">Name Error</div>
+    <div  th:if="${#fields.hasErrors('population')}" th:errors="*{population}">Name Error</div>
+    <div  th:if="${#fields.hasErrors('gdp')}" th:errors="*{gdp}">Name Error</div>
 </form>
 
 </body>

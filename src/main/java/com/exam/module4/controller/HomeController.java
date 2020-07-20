@@ -7,6 +7,8 @@ import com.exam.module4.service.CityService;
 import com.exam.module4.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -42,14 +44,20 @@ public class HomeController {
     }
 
     @PostMapping("/create")
-    public ModelAndView createCity(@ModelAttribute("newcity") City city, @RequestParam("country")Long countryid){
-        ModelAndView mv = new ModelAndView("create");
-        if(cityService.save(city)!= null){
-            mv.addObject("mess","create successful");
-            mv.addObject("newcity",new City());
+    public ModelAndView createCity(@Validated @ModelAttribute("newcity") City city, BindingResult bindingResult){
+        ModelAndView mv = null;
+
+        if(bindingResult.hasFieldErrors()){
+            return new ModelAndView("create");
         }else {
-            mv.addObject("mess","create not successful");
-            mv.addObject("newcity",city);
+            mv = new ModelAndView("create");
+            if(cityService.save(city)!= null){
+                mv.addObject("mess","create successful");
+                mv.addObject("newcity",new City());
+            }else {
+                mv.addObject("mess","create not successful");
+                mv.addObject("newcity",city);
+            }
         }
         return mv;
 
@@ -63,9 +71,15 @@ public class HomeController {
     }
 
     @PostMapping("edit/{id}")
-    public ModelAndView editCity(@PathVariable Long id){
+    public ModelAndView editCity(@ModelAttribute City city,@PathVariable Long id){
         ModelAndView mv = new ModelAndView("edit");
         City editCity = cityService.findOne(id);
+        editCity.setCountry(city.getCountry());
+        editCity.setName(city.getName());
+        editCity.setPopulation(city.getPopulation());
+        editCity.setDescription(city.getDescription());
+        editCity.setGdp(city.getGdp());
+        editCity.setSquare(city.getSquare());
         if(cityService.save(editCity)!=null){
             mv.addObject("mess","update info successful");
             mv.addObject("newcity",new City());

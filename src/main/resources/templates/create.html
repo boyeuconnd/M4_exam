@@ -74,6 +74,10 @@
             <div class="fs-25 t-center" style="color: green" th:text="${mess}"></div>
         </th:block>
     </div>
+    <div  th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+    <div  th:if="${#fields.hasErrors('square')}" th:errors="*{square}">Name Error</div>
+    <div  th:if="${#fields.hasErrors('population')}" th:errors="*{population}">Name Error</div>
+    <div  th:if="${#fields.hasErrors('gdp')}" th:errors="*{gdp}">Name Error</div>
 
 
 </form>
